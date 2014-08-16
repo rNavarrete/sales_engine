@@ -11,7 +11,7 @@ class MerchantRepository
 
   def load
     data = CSV.open(filepath, headers: true, header_converters: :symbol)
-    @merchants = data.map {|row| Merchant.new(row)}
+    @merchants = data.collect {|row| Merchant.new(row)}
   end
 
   def all
@@ -22,7 +22,11 @@ class MerchantRepository
   	merchants.sample
   end
 
-  def find_by_name(name)
-  	merchants.select {|merchant| merchant.name == name}
+  def find_by(type, query)
+  	merchants.detect {|merchant| merchant.send(type.downcase.to_sym) == query.downcase}
+  end
+
+  def find_all_by(type, query)
+  	merchants.select {|merchant| merchant.send(type.downcase.to_sym) == query.downcase}
   end
 end
