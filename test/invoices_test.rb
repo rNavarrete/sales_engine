@@ -1,13 +1,13 @@
 require 'csv'
 require_relative 'test_helper'
-require_relative '../lib/invoices'
+require_relative '../lib/invoice'
 
-class InvoicesTest < Minitest::Test
+class InvoiceTest < Minitest::Test
 	attr_reader :invoices
 
 	def setup
 		csv = CSV.open("./data/invoices_test.csv", headers:  true, header_converters: :symbol)
-    @invoices = csv.collect {|row| Invoices.new(row)}
+    @invoices = csv.collect {|row| Invoice.new(row)}
 	end
 
 	def test_it_returns_id
@@ -33,5 +33,4 @@ class InvoicesTest < Minitest::Test
 	def test_it_returns_updated_at
 		assert_equal "2012-03-12 03:54:10 UTC", invoices.first.updated_at
 	end	
-
 end
