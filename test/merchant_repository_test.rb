@@ -5,7 +5,6 @@ class MerchantRepositoryTest < Minitest::Test
 	attr_reader :merchant_repository
 
 	def setup
-		filepath             = "./data/merchants.csv"
 		@merchant_repository = MerchantRepository.new
 	end
 
