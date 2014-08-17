@@ -6,10 +6,26 @@ class InvoiceRepository
 	
 	def initialize
 		data      = CSV.open("./data/invoices.csv", headers: true, header_converters: :symbol)
-		@invoices = data.each {|row| Invoice.new(row)}
+		@invoices = data.collect {|row| Invoice.new(row)}
 	end
 
-	def method_name
-		
+	def all
+		invoices
 	end
+
+	def random
+		invoices.sample
+	end
+
+	def find_by(type, query)
+		invoices.detect {|invoice| invoice.send(type.to_sym) == query}
+	end
+
+	def find_all_by(type, query)
+		invoices.select {|invoice| invoice.send(type.to_sym) == query}
+	end
+
+
+
 end
+

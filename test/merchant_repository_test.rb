@@ -32,7 +32,4 @@ class MerchantRepositoryTest < Minitest::Test
 	  result = merchant_repository.find_all_by("name", "williamson group")
 	  assert_equal 2, result.count
 	end
-
-
-
 end	
