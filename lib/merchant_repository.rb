@@ -29,4 +29,8 @@ class MerchantRepository
   def find_all_by(type, query)
   	merchants.select {|merchant| merchant.send(type.downcase.to_sym) == query.downcase}
   end
+
+  def items
+  	
+  end
 end
