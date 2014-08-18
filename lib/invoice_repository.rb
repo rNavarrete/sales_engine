@@ -18,14 +18,11 @@ class InvoiceRepository
 	end
 
 	def find_by(type, query)
-		invoices.detect {|invoice| invoice.send(type.to_sym) == query}
+		invoices.detect {|invoice| invoice.send(type.downcase.to_sym) == query}
 	end
 
 	def find_all_by(type, query)
-		invoices.select {|invoice| invoice.send(type.to_sym) == query}
+		invoices.select {|invoice| invoice.send(type.downcase.to_sym) == query}
 	end
-
-
-
 end
 
