@@ -1,14 +1,16 @@
 require 'bigdecimal'
 require 'bigdecimal/util'
 require 'csv'
+require_relative '../lib/csv_handler'
 require_relative '../lib/item'
 
 class ItemRepository
-	attr_reader :items
+	attr_reader :items, :engine
 
-	def initialize
-		csv = CSV.open("./data/items.csv", headers: true, header_converters: :symbol)
-		@items = csv.collect {|row| Item.new(row)}
+	def initialize(engine)
+		@engine = engine
+		csv      = CsvHandler.new("./data/items.csv")
+		@items = csv.data.collect {|row| Item.new(row, self)}
 	end
 
 	def all
@@ -19,23 +21,43 @@ class ItemRepository
 		items.sample
 	end
 
-	def find_by(type, query)
-
-    if type_unit_price?(type)
-      unit_price(query)
-		else  
-		  items.detect {|item| item.send(type.downcase.to_sym) == query}
-		end  
+	def find_by_id(id)
+		items.detect {|item| item.id == id}
 	end
 
-	def type_unit_price?(type)
-    type.downcase == "unit_price"
-  end
+	def find_by_name(name)
+		items.detect {|item| item.name == name}
+	end
 
-  def unit_price(price)
-  	 price = (price.to_f * 100.00).round.to_s
-   	 cents = BigDecimal.new(price)
-	   items.detect {|item| item.unit_price == cents}
-  end
+	def find_by_description(description)
+		items.detect {|item| item.description == description}
+	end
+
+	def find_by_unit_price(unit_price)
+		items.detect {|item| item.unit_price == unit_price}
+	end
+
+	def find_by_merchant_id(merchant_id)
+		items.detect {|item| item.merchant_id == merchant_id}
+	end
+
+	def find_all_by_name(name)
+		items.select {|item| item.name == name}
+	end
+
+	def find_all_by_description(description)
+		items.select {|item| item.description == description}
+	end
+
+	def find_all_by_unit_price(unit_price)
+	  items.select {|item| item.unit_price == unit_price}
+	end
+
+	def find_all_by_merchant_id(merchant_id)
+		items.select {|item| item.merchant_id == merchant_id}
+	end
+
+	def find_all_by_created_at(created_at)
+	  items.select {|item| item.created_at == created_at}
+	end
 end
-
