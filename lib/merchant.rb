@@ -1,5 +1,5 @@
 class Merchant
-  attr_reader :id, :name, :created_at, :updated_at
+  attr_reader :id, :name, :created_at, :updated_at, :repo
 
   def initialize(row, repo)
     @id          = row[:id]
@@ -9,6 +9,7 @@ class Merchant
     @repo        = repo
   end
 
-def items
-  repo.find_items_by_merchant_id(self.id)
+  def items
+    repo.find_items_by_merchant_id(self.id)
+  end
 end

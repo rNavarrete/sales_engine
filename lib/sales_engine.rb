@@ -1,4 +1,5 @@
 require 'csv'
+require 'pry'
 require_relative'../lib/csv_handler'
 require_relative '../lib/merchant_repository'
 require_relative '../lib/invoice_repository'
@@ -14,6 +15,7 @@ class SalesEngine
 
   def initialize(dir="./data/")
     @dir = dir
+    startup
   end
 
   def startup
@@ -32,8 +34,12 @@ class SalesEngine
     customers      = CsvHandler.new("#{dir}customers.csv")
     @customer_repository = CustomerRepository.new(self, customers.data)
 
-    transactions      = CsvHandler.new("#{dir}trasactions.csv")
+    transactions      = CsvHandler.new("#{dir}transactions.csv")
     @transaction_repository = TransactionRepository.new(self, transactions.data)
+  end
+
+  def find_items_by_merchant_id(id)
+   item_repository.find_all_by_merchant_id(id)
   end
 end
 

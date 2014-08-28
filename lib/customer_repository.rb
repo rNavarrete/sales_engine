@@ -5,9 +5,8 @@ require_relative 'customer'
 class CustomerRepository
   attr_reader :customers, :engine
 
-  def initialize(engine)
-    csv       = CsvHandler.new("./data/customers.csv")
-    @customers = csv.data.collect {|row| Customer.new(row, self)}
+  def initialize(engine, params)
+    @customers = params.collect {|row| Customer.new(row, self)}
     @engine = engine
   end
 

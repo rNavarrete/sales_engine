@@ -7,10 +7,9 @@ require_relative '../lib/item'
 class ItemRepository
 	attr_reader :items, :engine
 
-	def initialize(engine)
+	def initialize(engine, params)
 		@engine = engine
-		csv      = CsvHandler.new("./data/items.csv")
-		@items = csv.data.collect {|row| Item.new(row, self)}
+		@items  = params.collect {|row| Item.new(row, self)}
 	end
 
 	def all
