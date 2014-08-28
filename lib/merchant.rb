@@ -2,7 +2,7 @@ class Merchant
   attr_reader :id, :name, :created_at, :updated_at, :repo
 
   def initialize(row, repo)
-    @id          = row[:id]
+    @id          = (row[:id]).to_i
     @name        = (row[:name]).downcase
     @created_at  = row[:created_at]
     @updated_at  = row[:updated_at]

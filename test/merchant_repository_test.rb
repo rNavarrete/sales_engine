@@ -8,8 +8,7 @@ class MerchantRepositoryTest < Minitest::Test
 
 	def setup
 		@engine = SalesEngine.new
-		csv = CsvHandler.new("./data/merchants.csv")
-		@merchant_repository = MerchantRepository.new(engine, csv.data)
+		@merchant_repository = engine.merchant_repository
 	end
 
 	def test_it_returns_all_instances_of_merchant
