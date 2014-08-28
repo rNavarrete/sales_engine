@@ -4,10 +4,9 @@ require_relative "../lib/csv_handler"
 
 class MerchantRepository
 	attr_reader :merchants, :engine
-	#pass engine itself instead of self
-  def initialize(engine)
-    csv      = CsvHandler.new("./data/merchants.csv")
-    @merchants = csv.data.collect {|row| Merchant.new(row, self)}
+
+  def initialize(engine, params)
+    @merchants = params.collect {|merchant| Merchant.new(merchant, self)}
 		@engine = engine
   end
 
