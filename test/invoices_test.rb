@@ -20,17 +20,17 @@ class InvoiceTest < Minitest::Test
 
 	def test_it_returns_merchant_id
 		assert_equal "27", invoices.first.merchant_id
-	end	
-	
+	end
+
 	def test_it_returns_status
 		assert_equal "shipped", invoices.first.status
 	end
-	
+
 	def test_it_returns_created_at
 		assert_equal "2012-03-12 03:54:10 UTC", invoices.first.created_at
 	end
 
 	def test_it_returns_updated_at
 		assert_equal "2012-03-12 03:54:10 UTC", invoices.first.updated_at
-	end	
+	end
 end

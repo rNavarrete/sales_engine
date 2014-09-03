@@ -1,5 +1,4 @@
 require 'csv'
-require 'pry'
 require_relative'../lib/csv_handler'
 require_relative '../lib/merchant_repository'
 require_relative '../lib/invoice_repository'
