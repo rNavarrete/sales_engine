@@ -3,7 +3,7 @@ require 'bigdecimal'
 class Item
   attr_reader :id, :name, :description, :unit_price, :merchant_id, :created_at, :updated_at, :repo
 
-  def initialize(row, repo)
+  def initialize(row, repo=nil)
     @id          = (row[:id]).to_i
     @name        = row[:name]
     @description = row[:description]
