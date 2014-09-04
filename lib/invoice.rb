@@ -14,7 +14,7 @@ class Invoice
  	end
 
   def transactions
-    @repo.engine.transaction_repository.find_all_by_invoice_id(self.id)
+    @repo.find_all_transactions_by_invoice_id(self.id)
   end
 
   def invoice_items

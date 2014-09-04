@@ -5,39 +5,44 @@ require_relative '../lib/invoice_repository'
 
 
 class RelationshipsTest < Minitest::Test
-  attr_reader :merchant_repository, :items, :engine, :item_repo, :invoice_repo
+  attr_reader :merchant_repo, :items, :engine, :item_repo, :invoice_repo, :transaction_repo
 
   def setup
     @engine    = SalesEngine.new
     invoice_data = [{id: "45", customer_id: "1", merchant_id: "6", status: "shipped", created_at: "2012-03-27 14:53:59 UTC", updated_at: "2012-03-25 09:54:09 UTC"},{id: "23", customer_id: "1", merchant_id: "6", status: "shipped", created_at: "2012-03-27 14:53:59 UTC", updated_at: "2012-03-25 09:54:09 UTC"}]
     @invoice_repo = InvoiceRepository.new(engine, invoice_data)
-
-
+    transaction_data = [{id: "1", invoice_id: "45", credit_card_number: "4654405418249632", credit_card_expiration_date: "", result: "success", created_at: "2012-03-27 14:54:09 UTC", updated_at: "2012-03-27 14:54:09 UTC" },{id: "2", invoice_id: "3", credit_card_number: "4654405418249632", credit_card_expiration_date: "", result: "success", created_at: "2012-03-27 14:54:09 UTC", updated_at: "2012-03-27 14:54:09 UTC" }]
+    @transaction_repo = TransactionRepository.new(engine, transaction_data)
 
     merchant_data = [{id: "6", name: "Williamson Group", created_at: "2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 16:12:25 UTC"}]
-    @merchant_repository = MerchantRepository.new(engine, merchant_data)
+    @merchant_repo = MerchantRepository.new(engine, merchant_data)
     item_data  = [{id: "1", name: "donut", description: "jelly-filled", unit_price: 75107, merchant_id: "6", created_at: "2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 14:53:59 UTC"}, {id: 1, name: "donut", description: "chocolate-filled", unit_price: 75107, merchant_id: "6", created_at: "2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 14:53:59 UTC"}]
     @item_repo = ItemRepository.new(engine, item_data)
 
 
 
-    @engine.item_repository = item_repo
-    @engine.merchant_repository = merchant_repository
-    @engine.invoice_repository = invoice_repo
+    @engine.item_repository        = item_repo
+    @engine.merchant_repository    = merchant_repo
+    @engine.invoice_repository     = invoice_repo
+    @engine.transaction_repository = transaction_repo
 
   end
 
 
   def test_returns_name_of_merchant
-    assert_equal "williamson group", merchant_repository.merchants.first.name
+    assert_equal "williamson group", merchant_repo.merchants.first.name
   end
 
   def test_it_returns_a_merchants_items
-    assert_equal 2, merchant_repository.merchants.first.items.size
+    assert_equal 2, merchant_repo.merchants.first.items.size
   end
 
   def test_it_returns_a_merchants_invoices
-    assert_equal 4, merchant_repository.merchants.first.invoices.size
+    assert_equal 2, merchant_repo.merchants.first.invoices.size
+  end
+
+  def test_invoices_can_return_their_transactions
+    assert_equal 1, invoice_repo.invoices.first.transactions.size
   end
 end
 

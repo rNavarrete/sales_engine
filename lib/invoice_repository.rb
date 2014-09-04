@@ -58,4 +58,8 @@ class InvoiceRepository
 		invoices.select {|invoice| invoice.created_at == created_at}
 	end
 
+	def find_all_transactions_by_invoice_id(id)
+		engine.find_all_transactions_by_invoice_id(id)
+	end
+
 end
