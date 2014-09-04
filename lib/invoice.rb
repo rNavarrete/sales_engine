@@ -18,7 +18,7 @@ class Invoice
   end
 
   def invoice_items
-    @repo.engine.invoice_item_repository.find_all_by_invoice_id(self.id)
+    @repo.find_all_invoice_items_by_invoice_id(self.id)
   end
 
   def items
