@@ -7,7 +7,7 @@ class InvoiceRepository
 
 	def initialize(engine, params)
 		@invoices = params.collect {|param| Invoice.new(param, self)}
-		@engine = engine
+		@engine   = engine
 	end
 
 	def all

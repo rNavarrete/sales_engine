@@ -36,5 +36,4 @@ class Invoice
     @repo.engine.merchant_repository.find_by_id(self.merchant_id)
   end
 
-  #validate data
 end

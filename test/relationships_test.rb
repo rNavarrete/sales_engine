@@ -13,8 +13,8 @@ class RelationshipsTest < Minitest::Test
     invoice_data = [{id: "45", customer_id: "1", merchant_id: "6", status: "shipped", created_at: "2012-03-27 14:53:59 UTC", updated_at: "2012-03-25 09:54:09 UTC"},{id: "23", customer_id: "1", merchant_id: "6", status: "shipped", created_at: "2012-03-27 14:53:59 UTC", updated_at: "2012-03-25 09:54:09 UTC"}]
     transaction_data = [{id: "1", invoice_id: "45", credit_card_number: "4654405418249632", credit_card_expiration_date: "", result: "success", created_at: "2012-03-27 14:54:09 UTC", updated_at: "2012-03-27 14:54:09 UTC" },{id: "2", invoice_id: "3", credit_card_number: "4654405418249632", credit_card_expiration_date: "", result: "success", created_at: "2012-03-27 14:54:09 UTC", updated_at: "2012-03-27 14:54:09 UTC" }]
     merchant_data = [{id: "6", name: "Williamson Group", created_at: "2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 16:12:25 UTC"}]
-    item_data  = [{id: "1", name: "donut", description: "jelly-filled", unit_price: 75107, merchant_id: "6", created_at: "2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 14:53:59 UTC"}, {id: 1, name: "donut", description: "chocolate-filled", unit_price: 75107, merchant_id: "6", created_at: "2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 14:53:59 UTC"}]
-    invoice_items_data = [{id: "1", item_id: "539", invoice_id: "45", quantity: "5",unit_price: 13635, created_at: "2012-03-27 14:54:09 UTC", updated_at: "2012-03-27 14:54:09 UTC" },{id: "1", item_id: "539", invoice_id: "45", quantity: "5",unit_price: 13635, created_at: "2012-03-27 14:54:09 UTC", updated_at: "2012-03-27 14:54:09 UTC" }]
+    item_data  = [{id: "1", name: "donut", description: "jelly-filled", unit_price: 75107, merchant_id: "6", created_at: "2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 14:53:59 UTC"}, {id: "2", name: "donut", description: "chocolate-filled", unit_price: 75107, merchant_id: "6", created_at: "2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 14:53:59 UTC"}]
+    invoice_items_data = [{id: "1", item_id: "2", invoice_id: "45", quantity: "5",unit_price: 13635, created_at: "2012-03-27 14:54:09 UTC", updated_at: "2012-03-27 14:54:09 UTC" },{id: "2", item_id: "2", invoice_id: "45", quantity: "5",unit_price: 13635, created_at: "2012-03-27 14:54:09 UTC", updated_at: "2012-03-27 14:54:09 UTC" }]
 
     @invoice_repo = InvoiceRepository.new(engine, invoice_data)
     @transaction_repo = TransactionRepository.new(engine, transaction_data)
@@ -49,6 +49,10 @@ class RelationshipsTest < Minitest::Test
 
   def test_invoices_can_return_its_associated_invoice_items
     assert_equal 2, invoice_repo.invoices.first.invoice_items.size
+  end
+
+  def test_an_invoice_can_return_all_associated_items
+    assert_equal 2, invoice_repo.invoices.first.items.size
   end
 end
 
