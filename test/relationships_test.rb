@@ -86,6 +86,10 @@ class RelationshipsTest < Minitest::Test
   def test_a_transaction_can_find_its_invoice
     assert_equal "shipped", transaction_repo.transactions.first.invoice.status
   end
+
+  def test_a_customer_can_return_its_invoices
+    assert_equal 45, customer_repo.customers.first.invoices.first.id
+  end
 end
 
 

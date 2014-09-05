@@ -49,4 +49,8 @@ class CustomerRepository
   def find_all_by_created_at(created_at)
     customers.select {|customer| customer.created_at == created_at}
   end
+
+  def find_all_invoices_by_customer_id(id)
+    engine.find_all_invoices_by_customer_id(id)
+  end
 end
