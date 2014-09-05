@@ -27,7 +27,7 @@ class CustomerRepository
   end
 
   def find_by_id(id)
-    customers.detect {|customer| customer.id == id.to_s}
+    customers.detect {|customer| customer.id == id}
   end
 
   def find_by_created_at(created_at)
