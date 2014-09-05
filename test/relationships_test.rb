@@ -82,6 +82,10 @@ class RelationshipsTest < Minitest::Test
   def test_an_item_can_return_its_merchant
     assert_equal "williamson group", item_repo.items.first.merchant.name
   end
+
+  def test_a_transaction_can_find_its_invoice
+    assert_equal "shipped", transaction_repo.transactions.first.invoice.status
+  end
 end
 
 
