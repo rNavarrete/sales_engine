@@ -16,7 +16,7 @@ class RelationshipsTest < Minitest::Test
     transaction_data   = [{id: "1", invoice_id: "45", credit_card_number: "4654405418249632", credit_card_expiration_date: "", result: "success", created_at: "2012-03-27 14:54:09 UTC", updated_at: "2012-03-27 14:54:09 UTC" },{id: "2", invoice_id: "3", credit_card_number: "4654405418249632", credit_card_expiration_date: "", result: "success", created_at: "2012-03-27 14:54:09 UTC", updated_at: "2012-03-27 14:54:09 UTC" }]
     merchant_data      = [{id: "6", name: "Williamson Group", created_at: "2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 16:12:25 UTC"}]
     item_data          = [{id: "1", name: "donut", description: "jelly-filled", unit_price: 75107, merchant_id: "6", created_at: "2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 14:53:59 UTC"}, {id: "2", name: "donut", description: "chocolate-filled", unit_price: 75107, merchant_id: "6", created_at: "2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 14:53:59 UTC"}]
-    invoice_items_data = [{id: "1", item_id: "2", invoice_id: "45", quantity: "5",unit_price: 13635, created_at: "2012-03-27 14:54:09 UTC", updated_at: "2012-03-27 14:54:09 UTC" },{id: "2", item_id: "2", invoice_id: "45", quantity: "5",unit_price: 13635, created_at: "2012-03-27 14:54:09 UTC", updated_at: "2012-03-27 14:54:09 UTC" }]
+    invoice_items_data = [{id: "1", item_id: "1", invoice_id: "45", quantity: "5",unit_price: 13635, created_at: "2012-03-27 14:54:09 UTC", updated_at: "2012-03-27 14:54:09 UTC" },{id: "2", item_id: "2", invoice_id: "45", quantity: "5",unit_price: 13635, created_at: "2012-03-27 14:54:09 UTC", updated_at: "2012-03-27 14:54:09 UTC" }]
     customer_data      = [{id: "1", first_name: "Joey", last_name: "Ondricka", created_at: "2012-03-27 14:54:09 UTC", updated_at: "2012-03-27 14:54:09 UTC"}, {id: "5", first_name: "Chris", last_name: "Navarrete", created_at: "2012-03-27 14:54:09 UTC", updated_at: "2012-03-27 14:54:09 UTC"}]
 
     @customer_repo     = CustomerRepository.new(engine, customer_data)
@@ -72,7 +72,11 @@ class RelationshipsTest < Minitest::Test
   end
 
   def test_an_invoice_item_can_find_its_item
-    assert_equal "chocolate-filled", invoice_item_repo.invoice_items.first.item.description
+    assert_equal "chocolate-filled", invoice_item_repo.invoice_items.last.item.description
+  end
+
+  def test_an_item_can_return_all_its_invoice_items
+    assert_equal 1, item_repo.items.first.invoice_items.size
   end
 end
 

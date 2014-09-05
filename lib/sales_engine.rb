@@ -18,22 +18,22 @@ class SalesEngine
   end
 
   def startup
-    merchants      = CsvHandler.new("#{dir}merchants.csv")
+    merchants            = CsvHandler.new("#{dir}merchants.csv")
     @merchant_repository = MerchantRepository.new(self, merchants.data)
 
-    invoices      = CsvHandler.new("#{dir}invoices.csv")
+    invoices             = CsvHandler.new("#{dir}invoices.csv")
     @invoice_repository  = InvoiceRepository.new(self, invoices.data)
 
-    items      = CsvHandler.new("#{dir}items.csv")
+    items                = CsvHandler.new("#{dir}items.csv")
     @item_repository     = ItemRepository.new(self, items.data)
 
-    invoice_items      = CsvHandler.new("#{dir}invoice_items.csv")
+    invoice_items            = CsvHandler.new("#{dir}invoice_items.csv")
     @invoice_item_repository = InvoiceItemRepository.new(self, invoice_items.data)
 
-    customers      = CsvHandler.new("#{dir}customers.csv")
+    customers            = CsvHandler.new("#{dir}customers.csv")
     @customer_repository = CustomerRepository.new(self, customers.data)
 
-    transactions      = CsvHandler.new("#{dir}transactions.csv")
+    transactions            = CsvHandler.new("#{dir}transactions.csv")
     @transaction_repository = TransactionRepository.new(self, transactions.data)
   end
 
@@ -67,6 +67,10 @@ class SalesEngine
 
   def find_item_by_item_id(id)
     item_repository.find_by_id(id)
+  end
+
+  def find_all_invoice_items_by_item_id(id)
+    invoice_item_repository.find_all_by_item_id(id)
   end
 end
 

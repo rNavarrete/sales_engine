@@ -59,4 +59,8 @@ class ItemRepository
 	def find_all_by_created_at(created_at)
 	  items.select {|item| item.created_at == created_at}
 	end
+
+	def find_all_invoice_items(id)
+		engine.find_all_invoice_items_by_item_id(id)
+	end
 end
