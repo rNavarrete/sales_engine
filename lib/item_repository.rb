@@ -63,4 +63,8 @@ class ItemRepository
 	def find_all_invoice_items(id)
 		engine.find_all_invoice_items_by_item_id(id)
 	end
+
+	def find_merchant(id)
+    engine.find_merchant_by_merchant_id(id)
+  end
 end

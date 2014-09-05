@@ -15,6 +15,10 @@ class Item
   end
 
   def invoice_items
-    repo.find_all_invoice_items(id)
+    repo.find_all_invoice_items(self.id)
+  end
+
+  def merchant
+    repo.find_merchant(self.merchant_id)
   end
 end
