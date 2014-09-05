@@ -3,6 +3,7 @@ require_relative '../lib/sales_engine'
 require_relative '../lib/merchant'
 require_relative '../lib/invoice_repository'
 require_relative '../lib/customer_repository'
+require_relative '../lib/invoice_item_repository'
 
 
 class RelationshipsTest < Minitest::Test
@@ -31,8 +32,6 @@ class RelationshipsTest < Minitest::Test
     @engine.transaction_repository  = transaction_repo
     @engine.invoice_item_repository = invoice_item_repo
     @engine.customer_repository     = customer_repo
-
-
   end
 
 
@@ -66,6 +65,10 @@ class RelationshipsTest < Minitest::Test
 
   def test_an_invoice_can_return_its_merchant
     assert_equal "williamson group", invoice_repo.invoices.first.merchant.name
+  end
+
+  def test_an_invoice_item_can_find_its_invoice
+    assert_equal 6, invoice_item_repo.all.first.invoice.merchant_id
   end
 end
 
