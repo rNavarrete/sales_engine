@@ -26,7 +26,7 @@ class Invoice
   end
 
   def invoice_total
-    invoice_items.inject(0) {|sum, invoice_item| sum + invoice_item.quantity * invoice_item.unit_price}
+    invoice_items.inject(0) {|sum, invoice_item| sum + invoice_item.total}
   end
 
   def items

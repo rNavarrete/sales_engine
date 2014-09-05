@@ -16,7 +16,7 @@ class RelationshipsTest < Minitest::Test
     transaction_data   = [{id: "1", invoice_id: "45", credit_card_number: "4654405418249632", credit_card_expiration_date: "", result: "success", created_at: "2012-03-27 14:54:09 UTC", updated_at: "2012-03-27 14:54:09 UTC" },{id: "2", invoice_id: "3", credit_card_number: "4654405418249632", credit_card_expiration_date: "", result: "success", created_at: "2012-03-27 14:54:09 UTC", updated_at: "2012-03-27 14:54:09 UTC" }]
     merchant_data      = [{id: "6", name: "Williamson Group", created_at: "2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 16:12:25 UTC"}]
     item_data          = [{id: "1", name: "donut", description: "jelly-filled", unit_price: 75107, merchant_id: "6", created_at: "2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 14:53:59 UTC"}, {id: "2", name: "donut", description: "chocolate-filled", unit_price: 75107, merchant_id: "6", created_at: "2012-03-27 14:53:59 UTC", updated_at: "2012-03-27 14:53:59 UTC"}]
-    invoice_items_data = [{id: "1", item_id: "1", invoice_id: "45", quantity: "5",unit_price: 13635, created_at: "2012-03-27 14:54:09 UTC", updated_at: "2012-03-27 14:54:09 UTC" },{id: "2", item_id: "2", invoice_id: "45", quantity: "5",unit_price: 13635, created_at: "2012-03-27 14:54:09 UTC", updated_at: "2012-03-27 14:54:09 UTC" }]
+    invoice_items_data = [{id: "1", item_id: "1", invoice_id: "45", quantity: "5",unit_price: 13635, created_at: "2012-03-27 14:54:09 UTC", updated_at: "2012-03-27 14:54:09 UTC" },{id: "2", item_id: "2", invoice_id: "45", quantity: "5",unit_price: 1235, created_at: "2012-03-27 14:54:09 UTC", updated_at: "2012-03-27 14:54:09 UTC" }]
     customer_data      = [{id: "1", first_name: "Joey", last_name: "Ondricka", created_at: "2012-03-27 14:54:09 UTC", updated_at: "2012-03-27 14:54:09 UTC"}, {id: "5", first_name: "Chris", last_name: "Navarrete", created_at: "2012-03-27 14:54:09 UTC", updated_at: "2012-03-27 14:54:09 UTC"}]
 
     @customer_repo     = CustomerRepository.new(engine, customer_data)
@@ -95,9 +95,9 @@ class RelationshipsTest < Minitest::Test
   #   assert_equal 3, merchant_repo.merchants.first.transactions.last.invoice_id
   # end
 
-  # def test_an_invoice_can_retrieve_its_total
-  #   assert_equal BigDecimal.new("136.35"), invoice_repo.invoices.first.invoice_total
-  # end
+  def test_an_invoice_can_retrieve_its_total
+    assert_equal BigDecimal.new("743.5"), invoice_repo.invoices.first.invoice_total
+  end
 
   def test_an_invoice_item_can_calculate_its_total
     assert_equal BigDecimal.new("681.75"), invoice_item_repo.invoice_items.first.total
