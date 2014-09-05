@@ -16,4 +16,10 @@ class Transaction
     repo.find_invoice_by_invoice_id(self.invoice_id)
   end
 
+  def successful?
+    self.result == "success"
+  end
+
+
+
 end

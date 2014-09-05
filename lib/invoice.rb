@@ -17,15 +17,15 @@ class Invoice
     @repo.find_all_transactions_by_invoice_id(self.id)
   end
 
-  def successful_transactions
-    transactions.find_all {|transaction|transaction.result == "success"}
+  def successful_invoice?
+    transactions.any? {|transaction| transaction.successful?}
   end
 
   def invoice_items
     @repo.find_all_invoice_items_by_invoice_id(self.id)
   end
 
-  def invoice_total
+  def total
     invoice_items.inject(0) {|sum, invoice_item| sum + invoice_item.total}
   end
 

@@ -17,15 +17,11 @@ class Merchant
     repo.find_invoices_by_merchant_id(self.id)
   end
 
-  # def successful_transactions
-  #   invoices.each do |invoice|
-  #     invoice.successful_transactions
-  #   end
-  #   end
-  # end
+  def successful_invoices
+    invoices.find_all {|invoice| invoice.successful_invoice?}
+  end
 
-  # def total_revenue
-  #   successful_transactions.each do |transaction|
-  #     transaction.invoice.
-  # end
+  def total_revenue
+    successful_invoices.inject(0) {|sum, invoice| sum + invoice.total}
+  end
 end
