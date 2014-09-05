@@ -70,6 +70,10 @@ class RelationshipsTest < Minitest::Test
   def test_an_invoice_item_can_find_its_invoice
     assert_equal 6, invoice_item_repo.all.first.invoice.merchant_id
   end
+
+  def test_an_invoice_item_can_find_its_item
+    assert_equal "chocolate-filled", invoice_item_repo.invoice_items.first.item.description
+  end
 end
 
 
