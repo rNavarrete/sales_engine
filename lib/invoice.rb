@@ -32,7 +32,7 @@ class Invoice
   end
 
   def merchant
-    @repo.engine.merchant_repository.find_by_id(self.merchant_id)
+    @repo.find_merchant_by_merchant_id(self.merchant_id)
   end
 
 end

@@ -70,4 +70,7 @@ class InvoiceRepository
 		engine.find_customer_by_customer_id(id)
 	end
 
+	def find_merchant_by_merchant_id(id)
+		engine.find_merchant_by_merchant_id(id)
+	end
 end

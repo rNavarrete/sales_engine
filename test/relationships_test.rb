@@ -63,6 +63,10 @@ class RelationshipsTest < Minitest::Test
   def test_an_invoice_can_return_its_customer
     assert_equal "Joey", invoice_repo.invoices.first.customer.first_name
   end
+
+  def test_an_invoice_can_return_its_merchant
+    assert_equal "williamson group", invoice_repo.invoices.first.merchant.name
+  end
 end
 
 
