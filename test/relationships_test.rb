@@ -90,6 +90,18 @@ class RelationshipsTest < Minitest::Test
   def test_a_customer_can_return_its_invoices
     assert_equal 45, customer_repo.customers.first.invoices.first.id
   end
+
+  # def test_a_merchant_can_retrieve_his_transactions
+  #   assert_equal 3, merchant_repo.merchants.first.transactions.last.invoice_id
+  # end
+
+  # def test_an_invoice_can_retrieve_its_total
+  #   assert_equal BigDecimal.new("136.35"), invoice_repo.invoices.first.invoice_total
+  # end
+
+  def test_an_invoice_item_can_calculate_its_total
+    assert_equal BigDecimal.new("681.75"), invoice_item_repo.invoice_items.first.total
+  end
 end
 
 

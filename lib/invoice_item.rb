@@ -5,7 +5,7 @@ class InvoiceItem
 
   def initialize(row, repo)
     @id          = row[:id].to_i
-    @quantity    = row[:quantity]
+    @quantity    = row[:quantity].to_i
     @unit_price  = BigDecimal.new((row[:unit_price].to_f / 100).to_s)
     @created_at  = row[:created_at]
     @updated_at  = row[:updated_at]
@@ -20,5 +20,9 @@ class InvoiceItem
 
   def item
     repo.find_item_by_item_id(self.item_id)
+  end
+
+  def total
+    self.quantity * self.unit_price
   end
 end

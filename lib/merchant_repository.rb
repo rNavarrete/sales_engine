@@ -46,4 +46,8 @@ class MerchantRepository
     engine.find_invoices_by_merchant_id(id)
   end
 
+  # def most_revenue(num)
+  #   merchants.each do |merchant|
+  #     merchant.successful_transactions
+  # end
 end

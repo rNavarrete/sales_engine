@@ -16,4 +16,16 @@ class Merchant
   def invoices
     repo.find_invoices_by_merchant_id(self.id)
   end
+
+  # def successful_transactions
+  #   invoices.each do |invoice|
+  #     invoice.successful_transactions
+  #   end
+  #   end
+  # end
+
+  # def total_revenue
+  #   successful_transactions.each do |transaction|
+  #     transaction.invoice.
+  # end
 end
